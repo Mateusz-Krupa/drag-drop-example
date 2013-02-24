@@ -29,8 +29,6 @@ var links = document.querySelectorAll('.dragable-items'), el = null;
 
 for (var i = 0; i < links.length; i++) {
     el = links[i];
-
-    // even required? Spec says yes, browsers say no.
     el.setAttribute('draggable', 'true');
 
     addEvent(el, 'dragstart', function (e) {
@@ -66,7 +64,7 @@ function addEventListeners(bin){
     });
 
     localBox.appendChild(clone);
-    el.parentNode.removeChild(el);
+    element.parentNode.removeChild(element);
 
     return false;
   });
