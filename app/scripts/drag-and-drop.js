@@ -25,6 +25,8 @@ var addEvent = (function () {
 var msie = /*@cc_on!@*/0; 
 
 var links = document.querySelectorAll('.dragable-items'), el = null;
+
+
 for (var i = 0; i < links.length; i++) {
     el = links[i];
 
@@ -55,18 +57,16 @@ function addEventListeners(bin){
   });
 
   addEvent(bin, 'drop', function (e) {
-    var localBox = e.target;
+    var localBox = e.target || e.srcElement;
     if (e.stopPropagation) e.stopPropagation();
-    var el = document.getElementById(e.dataTransfer.getData('Text'));
-    var clone = el.cloneNode(true);
-    
+    var element = document.getElementById(e.dataTransfer.getData('Text'));
+    var clone = element.cloneNode(true);
     addEvent(clone, 'dragstart', function (e) {
       e.dataTransfer.setData('Text', this.id);
     });
 
     localBox.appendChild(clone);
     el.parentNode.removeChild(el);
-    localBox.appendChild(y);
 
     return false;
   });
@@ -143,9 +143,7 @@ function createDocumentFragment(img){
 }
   
 addEvent(fileDrop,"drop", function (e) {
-     e.preventDefault(); 
-     e.stopPropagation();
-     traverseFiles(e.dataTransfer.files);
+  traverseFiles(e.dataTransfer.files);
     this.className = "";
         e.preventDefault();
         e.stopPropagation();
